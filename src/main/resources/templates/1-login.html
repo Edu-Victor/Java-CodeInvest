@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/login.css}">
+        
+        <title>Login</title>
+    </head>
+
+    <body>
+
+
+        <div class="login-container">
+            <div class="logo-container">
+                <img class="logo" th:src="@{/img/logo.png}" alt="Logo CodeInvest">
+                <p>CodeInvest</p>
+            </div>
+            
+            <h2>Login</h2>
+            <form id="login-form" onsubmit="event.preventDefault(); login();">
+                <input type="email" id="email" placeholder="Email" required />
+                <input type="password" id="password" placeholder="Senha" required />
+
+                <div class="botoes-login">
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="cadastrar()">Cadastrar</button>
+                </div>
+
+                <p class="esqueci-senha"><a href="#" onclick="recuperarSenha()">Esqueci a senha?</a></p>
+                <p id="login-error"></p>
+            </form>
+        </div>
+
+
+        <footer class="site-footer">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Todos os direitos reservados | Desenvolvido por Eduardo Victor</p>
+            </div>
+        </footer>
+
+
+
+        <canvas id="canvas"></canvas>
+        <script th:src="@{/js/canvas.js}"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+        <script th:src="@{/js/firebase-config.js}"></script>
+        <script th:src="@{/js/script.js}"></script>
+
+    </body>
+</html>

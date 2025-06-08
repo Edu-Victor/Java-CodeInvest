@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script src="https://kit.fontawesome.com/62178003c7.js" crossorigin="anonymous"></script>
+    <title>Favoritos</title>
+</head>
+<body>
+
+    <header class="navbar">
+        
+        <a th:href="@{/2-carteira}" class="link-img">
+            <img class="logo-nav" src="img/logo.png" alt="Logo">
+            <h2>CodeInvest</h2>
+        </a>
+        
+
+        <ul class="menu-navbar">
+            <div class="container-botoes-nav">
+                <li>
+                    <a th:href="@{/2-carteira}"><p>Home</p></a>
+                </li>
+                <li>
+                    <a th:href="@{/3-favoritos}"><p>Favoritos</p></a>
+                </li>
+                <li>
+                    <a th:href="@{/4-adicionarfavoritos}"><p>Adicionar Favoritos</p></a>
+                </li>
+                <li>
+                    <a th:href="@{/6-opcaodecompra}"><p>Opções de Compra</p></a>
+                </li>
+            </div>
+            <li>
+                <p class="saldo">Saldo</p>
+                <p class="valor" th:text="'R$ ' + ${#numbers.formatDecimal(saldoTotal, 1, 'POINT', 2, 'COMMA')}"></p>
+            </li>
+            
+            <li>
+                <a th:href="@{/5-adicionarcarteira}">
+                    <i class="fa-solid fa-plus"></i>
+                    <p>Adicionar</p>
+                </a>
+            </li>
+            <li>
+                <a onclick="logout()" class="icon-exit">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <p>Sair</p>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+
+
+
+
+    <main class="dashboard-container">
+
+        <section class="ativos-section">
+            <h3>Opções de Compra</h3>
+            <div class="table-container">
+                <table class="ativos-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th>Rendimento</th>
+                            <th>Dividend</th>
+                            <th>Segmento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cli: ${favoritos}">
+                            <td th:text="${cli.id}" class="favorito-id"></td>
+                            <td th:text="${cli.nome}" class="favorito-nome"></td>
+                            <td th:text="${#numbers.formatDecimal(cli.valor, 1, 'POINT', 2, 'COMMA')}" class="vl_unitario" th:attr="data-raw-value=${cli.valor}"></td>
+                            <td th:text="${#numbers.formatDecimal(cli.rendimento, 1, 'POINT', 2, 'COMMA')}" class="favorito-rendimento" th:attr="data-raw-value=${cli.rendimento}"></td>
+                            <td th:text="${#numbers.formatDecimal(cli.dividend, 1, 'POINT', 2, 'COMMA')}" class="vl_total" th:attr="data-raw-value=${cli.dividend}"></td>
+                            <td th:text="${cli.segmento}" class="favorito-segmento"></td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+
+
+
+    <footer class="site-footer">
+      <div class="footer-bottom">
+        <p>&copy; 2025 Todos os direitos reservados | Desenvolvido por Eduardo Victor</p>
+      </div>
+    </footer>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script th:src="@{/js/firebase-config.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+
+    
+</body>
+</html>

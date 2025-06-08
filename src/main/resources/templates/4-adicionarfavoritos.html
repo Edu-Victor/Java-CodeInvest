@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script src="https://kit.fontawesome.com/62178003c7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Adicionar Favoritos</title>
+</head>
+<body>
+
+
+    <div id="modal-sucesso" class="modal-sucesso toast-sucesso">
+        <i class="fas fa-check-circle"></i> Ativo inserido nos favoritos com sucesso!
+    </div>
+
+
+    <header class="navbar">
+
+        <a th:href="@{/2-carteira}" class="link-img">
+            <img class="logo-nav" src="img/logo.png" alt="Logo">
+            <h2>CodeInvest</h2>
+        </a>
+
+    </header>
+
+
+
+    <main class="adicionar-container">
+        <section class="form-section">
+            <div class="form-header">
+                <h1><i class="fa-solid fa-star"></i> Adicionar Novo Favorito</h1>
+                <p>Preencha os dados do ativo para registrar nos favoritos</p>
+            </div>
+
+            <form id="form-ativo" class="ativo-form" th:action="@{/adicionarfavorito}" method="post" th:object="${addfavorito}">
+                <div class="linha-form">
+                    <div class="form-group">
+                        <label for="ativo-codigo">Código do Ativo*</label>
+                        <input type="text" id="ativo-codigo" placeholder="Ex: ALZM11, KNRI11" th:field="*{nome}" required onkeyup="buscarDadosFavorito()">
+                        <small class="form-hint">Em breve: ações e criptomoedas disponíveis na plataforma!</small>
+                    </div>
+                </div>
+
+                <div class="linha-form">
+                    <div class="form-group">
+                        <label for="ativo-valor">Valor(R$)</label>
+                        <div class="input-with-symbol">
+                            <input type="number" id="ativo-valor" placeholder="R$0,00" th:field="*{valor}" required readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ativo-dividend">Dividend Yield</label>
+                        <input type="number" id="ativo-dividend" placeholder="9%" th:field="*{dividend}" required readonly>
+                        <small class="form-hint">Últimos 12 meses</small>
+                    </div>
+                </div>
+
+                <div class="linha-form">
+                    <div class="form-group">
+                        <label for="ativo-rendimento">Rendimento(R$)</label>
+                        <input type="number" id="ativo-rendimento" step="0.01" min="0.01" placeholder="R$0,00" th:field="*{rendimento}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ativo-segmento">Segmento</label>
+                        <input type="text" id="ativo-segmento" placeholder="Imobiliário" th:field="*{segmento}" readonly>
+                    </div>
+                </div>
+
+
+                <div class="form-acao">
+                    <button type="submit" class="btn-enviar">
+                        <i class="fas fa-save"></i> Salvar Ativo
+                    </button>
+                    <button type="button" class="btn-cancel" onclick="window.location.href='/2-carteira'">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+
+
+
+
+
+
+    <footer class="site-footer">
+      <div class="footer-bottom">
+        <p>&copy; 2025 Todos os direitos reservados | Desenvolvido por Eduardo Victor</p>
+      </div>
+    </footer>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/firebase-config.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+
+
+   
+
+</body>
+</html>
