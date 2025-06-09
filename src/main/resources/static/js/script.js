@@ -151,18 +151,22 @@ function calcularDividendos() {
 
 //---------------------------------------------------------------------------------------------------------//
 function buscarDadosFavorito() {
-    var codigoAtivo = $('#ativo-codigo').val();
-    $.ajax({
-        url: '/favoritos/fetch-data',
-        type: 'POST',
-        data: { codigoAtivo: codigoAtivo },
-        success: function(data) {
-            console.log(data);
-            $('#ativo-valor').val(data.valor);
-            $('#ativo-dividend').val(data.dividend);
-            $('#ativo-segmento').val(data.segmento);
-            $('#ativo-rendimento').val(data.rendimento);
-        }
+    let codigoAtivo = document.getElementById('ativo-codigo').value;
+
+    fetch('/favoritos/fetch-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `codigoAtivo=${encodeURIComponent(codigoAtivo)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('ativo-valor').value = data.valor;
+        document.getElementById('ativo-dividend').value = data.dividend;
+        document.getElementById('ativo-segmento').value = data.segmento;
+        document.getElementById('ativo-rendimento').value = data.rendimento;
     });
 }
 //---------------------------------------------------------------------------------------------------------//
