@@ -14,3 +14,6 @@ spring:
             schema-locations: classpath:/schema-postgresql.sql
             mode: always
             platform: postgres
+    
+    jpa:
+        open-in-view: false
